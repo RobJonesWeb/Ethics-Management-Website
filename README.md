@@ -1,1 +1,1 @@
-Third year project (Ethics Management Software) -- Robert Jones 22984348
+Third year project (Ethics Management Software) -- Robert Jones (Student Number: 22984348)
