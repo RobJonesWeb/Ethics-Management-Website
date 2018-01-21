@@ -22,6 +22,7 @@ class CreateProposalsTable extends Migration
              * Decide whether there going to be a file based system or document editor going here.
              */
             $table->integer('user-level');
+            $table->integer('status');
             $table->rememberToken();
             $table->timestamps();
         });
