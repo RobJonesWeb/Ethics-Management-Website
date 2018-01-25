@@ -18,11 +18,11 @@ class CreateProposalsTable extends Migration
             $table->integer('author_id')->unique();
             $table->foreign('author_id')->references('id')->on('users');
             $table->string('title');
-            /*
-             * Decide whether there going to be a file based system or document editor going here.
-             */
-            $table->integer('user-level');
-            $table->integer('status');
+            $table->string('file_address')->unique();
+            $table->integer('user_level');
+            $table->foreign('user_level')->references('id')->on('roles');
+            $table->integer('status_id');
+            $table->foreign('status_id')->references('id')->on('status_levels');
             $table->rememberToken();
             $table->timestamps();
         });

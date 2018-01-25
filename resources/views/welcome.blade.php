@@ -1,5 +1,5 @@
 <?php
-$studentview = true;
+$studentview = false;
 ?>
 <!doctype html>
 <html lang="{{ app()->getLocale() }}">

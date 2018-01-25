@@ -36,7 +36,8 @@ header, footer {
 }
 
 .box-container .item {
-  display:inline-block;
+  align-content: space-evenly;
+  height: 2vh;
 }
 
 .box-container .item:nth-child(2) {

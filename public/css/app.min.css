@@ -8386,7 +8386,9 @@ footer {
 }
 
 .box-container .item {
-  display: inline-block;
+  -ms-flex-line-pack: space-evenly;
+      align-content: space-evenly;
+  height: 2vh;
 }
 
 .box-container .item:nth-child(2) {
