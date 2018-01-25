@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateStatusLevelsTable extends Migration
+class CreateUsersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,14 @@ class CreateStatusLevelsTable extends Migration
      */
     public function up()
     {
-        Schema::create('status_levels', function (Blueprint $table) {
+        Schema::create('users', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('status_description');
+            $table->string('name');
+            $table->string('email')->unique();
+            $table->integer('profession_id')->unsigned();
+            $table->foreign('profession_id')->references('id')->on('roles');
+            $table->string('password');
+            $table->rememberToken();
             $table->timestamps();
         });
     }
@@ -27,6 +32,6 @@ class CreateStatusLevelsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('status_levels');
+        Schema::dropIfExists('users');
     }
 }

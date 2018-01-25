@@ -15,13 +15,13 @@ class CreateProposalsTable extends Migration
     {
         Schema::create('proposals', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('author_id')->unique();
+            $table->integer('author_id')->unsigned();
             $table->foreign('author_id')->references('id')->on('users');
             $table->string('title');
             $table->string('file_address')->unique();
-            $table->integer('user_level');
+            $table->integer('user_level')->unsigned();
             $table->foreign('user_level')->references('id')->on('roles');
-            $table->integer('status_id');
+            $table->integer('status_id')->unsigned();
             $table->foreign('status_id')->references('id')->on('status_levels');
             $table->rememberToken();
             $table->timestamps();
