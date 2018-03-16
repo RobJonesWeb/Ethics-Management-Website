@@ -8351,8 +8351,8 @@ button.close {
 }
 
 * {
-  margin: 0 !important;
-  padding: 0 !important;
+  margin: 0;
+  padding: 0;
 }
 
 html,
@@ -8380,7 +8380,7 @@ body {
 
 header,
 footer {
-  background: #000;
+  background: #0d98ba;
   color: #FFF;
   width: inherit;
 }
@@ -8397,31 +8397,28 @@ footer {
           flex-grow: 2;
 }
 
-@media (max-width: 400px) {
-  .screen * {
-    display: none;
-  }
-
-  .burger-layer {
-    width: 35px;
-    height: 5px;
-    background-color: #FFF;
-    margin: 6px 0;
-    display: block;
-  }
+header .item ul li {
+  display: inline;
 }
 
-@media (min-width: 400px) {
-  .mobile * {
-    display: none;
-  }
+header .item ul li a {
+  color: #FFF;
+}
 
-  header .item ul li {
-    display: inline;
-  }
+input[readonly] {
+  background: #B0B0B0;
+}
 
-  header .item ul li a {
-    color: #FFF;
-  }
+.proposal-creation button {
+  display: inline !important;
+}
+
+.proposal-creation .proposal-field {
+  margin: 2% !important;
+  display: block;
+}
+
+.proposal-creation .proposal-field input[readonly] {
+  background: #B0B0B0;
 }
 

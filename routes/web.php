@@ -11,10 +11,9 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
+Route::resource('/', 'HomeController');
+Route::resource('/upload', 'UploadController');
+Route::post('upload', ['uses' => 'UploadController@store', 'as' => 'upload.store']);
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+

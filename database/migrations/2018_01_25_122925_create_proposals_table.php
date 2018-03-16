@@ -23,7 +23,6 @@ class CreateProposalsTable extends Migration
             $table->foreign('user_level')->references('id')->on('roles');
             $table->integer('status_id')->unsigned();
             $table->foreign('status_id')->references('id')->on('status_levels');
-            $table->rememberToken();
             $table->timestamps();
         });
     }

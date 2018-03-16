@@ -62,6 +62,14 @@
                         </div>
 
                         <div class="form-group">
+                            <label for="student_no" class="col-md-4 control-label">Student Number</label>
+
+                            <div class="col-md-6">
+                                <input id="student_no" type="student_no" class="form-control" name="student_no">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
                                 <button type="submit" class="btn btn-primary">
                                     Register
