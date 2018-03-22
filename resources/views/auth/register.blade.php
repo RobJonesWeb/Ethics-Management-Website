@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.master')
 
 @section('content')
 <div class="container">
@@ -65,9 +65,11 @@
                             <label for="student_no" class="col-md-4 control-label">Student Number</label>
 
                             <div class="col-md-6">
-                                <input id="student_no" type="student_no" class="form-control" name="student_no">
+                                <input id="student_no" type="studentno" class="form-control" name="student_no">
                             </div>
                         </div>
+
+
 
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">

@@ -1,58 +1,61 @@
-<?php
-$studentview = false;
-?>
-        <!doctype html>
-<html lang="{{ app()->getLocale() }}">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <title>Ethics Management Software</title>
-
-    <link type="text/css" rel="stylesheet" href="{{ asset('css/app.min.css')}}">
-</head>
-<body>
-<div class="box-container">
-    <header>
-        <h2>Create a new proposal</h2>
-        <!--<div>
-            <ul>
-                <li><a href="">Home</a></li>
-                <?php
-                /*if ($studentview == True) {
-                    echo '<li><a href="">My Proposal</a></li>';
-                    echo '<li><a href="">Proposal Versions</a></li>';
-                } else {
-                    echo '<li><a href="">Proposals</a></li>';
-                  }*/
-                echo 'You are on the home page';
-                ?>
-            </ul>
-        </div>-->
-    </header>
-</div>
-<div class="box-container">
+@extends('layouts.master')
+@section('title')
+    <h2>Create a new proposal</h2>
+@endsection
+@section('content')
     <article>
-        {!! Form::open(array('route'=>'upload.store', 'class'=>'proposal-creation', 'files' => true)) !!}
-        @if ($errors->any())
-            <p style="color:#F00;">Please ensure all inputs are filled out and the file format for upload is .pdf</p><br/>
-        @endif
-        {!! Form::label('title', 'Proposal Title', ['class'=>'proposal-field'])  !!}
-        {!! Form::text('title', '', ['class'=>'proposal-field']) !!}
-        {!! Form::label('studentno', 'Student Number', ['class'=>'proposal-field'])  !!}
-        {!! Form::text('studentno', $student_details, ['class'=>'proposal-field', 'readonly']) !!}
-        {!! Form::label('proposal', 'Upload Proposal (.pdf)', ['class'=>'proposal-field'])  !!}
-        {{ Form::file('proposal', ['class' => 'proposal-field']) }}
-        {!! Form::button('Save as draft', ['class'=>'submit proposal-field', 'name'=>'action', 'value'=>'draft', 'type'=>'submit']) !!}
-        {!! Form::button('Submit', ['class'=>'submit proposal-field', 'name'=>'action', 'value'=>'submit', 'type'=>'submit']) !!}
-        {{ Form::close() }}
+        <div class="box-container">
+            <div class="tab">
+                <button class="tab-link" onclick="changeForm(event, 'create')">Create from form</button>
+                <button class="tab-link" onclick="changeForm(event, 'upload')">Upload PDF</button><br/><br/>
+            </div>
+
+            <div id="create" class="tab-child">
+                <h3>Create proposal from form</h3>
+                <!-- Create Form -->
+            </div>
+
+            <div id="upload" class="tab-child">
+                <h3>Upload proposal (PDF)</h3>
+                {!! Form::open(array('route'=>'upload.store', 'class'=>'proposal-creation', 'files' => true)) !!}
+                @if ($errors->any())
+                    <p style="color:#F00;">Please ensure all inputs are filled out and the file format for upload is .pdf</p><br/>
+                @endif
+                {!! Form::label('title', 'Proposal Title', ['class'=>'proposal-field'])  !!}
+                {!! Form::text('title', '', ['class'=>'proposal-field']) !!}
+                {!! Form::label('studentno', 'Student Number', ['class'=>'proposal-field'])  !!}
+                {!! Form::text('studentno', $student_details, ['class'=>'proposal-field', 'readonly']) !!}
+                {!! Form::label('proposal', 'Upload Proposal (.pdf)', ['class'=>'proposal-field'])  !!}
+                {{ Form::file('proposal', ['class' => 'proposal-field']) }}
+                {!! Form::button('Save as draft', ['class'=>'submit proposal-field', 'name'=>'action', 'value'=>'draft-upload', 'type'=>'submit']) !!}
+                {!! Form::button('Submit', ['class'=>'submit proposal-field', 'name'=>'action', 'value'=>'submit-upload', 'type'=>'submit']) !!}
+                {{ Form::close() }}
+            </div>
+        </div>
     </article>
-</div>
 <!--<div class="box-container">
     <footer>
         Footer Content
     </footer>
 </div>-->
-</body>
-</html>
+@endsection
+<script>
+    function changeForm(evt, formType) {
+        var i;
+        var tabchild;
+        var tablink;
+
+        tabchild = document.getElementsByClassName("tab-child");
+        for (i = 0; i < tabchild.length; i++) {
+            tabchild[i].style.display = "none";
+        }
+
+        tablink = document.getElementsByClassName("tab-link");
+        for (i = 0; i < tablink.length; i++) {
+            tablink[i].className = tablink[i].className.replace(" active", "");
+        }
+
+        document.getElementById(formType).style.display = "block";
+        evt.currentTarget.className += " active";
+    }
+</script>

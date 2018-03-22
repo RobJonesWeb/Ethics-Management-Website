@@ -33,6 +33,43 @@ header, footer {
   background: $secondary-bg-color;
   color: $secondary-font-color;
   width: inherit;
+  margin: 0;
+  h2 {
+    margin: 0;
+  }
+}
+
+.tab {
+  overflow: hidden;
+  border: 1px solid $secondary-font-color;
+  background-color: $primary-bg-color;
+}
+
+.tab button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  padding: 10px 10px;
+}
+
+.tab button:hover {
+  background-color: darken($secondary-bg-color, 10%);
+}
+
+.tab button.active {
+  background-color: darken($secondary-bg-color, 10%);
+  color: #FFF;
+}
+
+.tab-child {
+  display: none;
+  padding: 20px 20px;
+  border: 1px solid $secondary-font-color;
+  border-top: none;
+}
+
+article form {
+  margin: 1%;
 }
 
 .box-container .item {
@@ -44,11 +81,11 @@ header, footer {
   flex-grow: 2;
 }
 
-  header .item ul li {
+  header ul li {
     display: inline;
   }
 
-  header .item ul li a {
+  header ul li a {
     color: $secondary-font-color;
   }
 

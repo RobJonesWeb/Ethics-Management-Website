@@ -8383,6 +8383,45 @@ footer {
   background: #0d98ba;
   color: #FFF;
   width: inherit;
+  margin: 0;
+}
+
+header h2,
+footer h2 {
+  margin: 0;
+}
+
+.tab {
+  overflow: hidden;
+  border: 1px solid #FFF;
+  background-color: #FFF;
+}
+
+.tab button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  padding: 10px 10px;
+}
+
+.tab button:hover {
+  background-color: #0a718a;
+}
+
+.tab button.active {
+  background-color: #0a718a;
+  color: #FFF;
+}
+
+.tab-child {
+  display: none;
+  padding: 20px 20px;
+  border: 1px solid #FFF;
+  border-top: none;
+}
+
+article form {
+  margin: 1%;
 }
 
 .box-container .item {
@@ -8397,11 +8436,11 @@ footer {
           flex-grow: 2;
 }
 
-header .item ul li {
+header ul li {
   display: inline;
 }
 
-header .item ul li a {
+header ul li a {
   color: #FFF;
 }
 
