@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Proposals;
 use App\User;
+use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Auth;
 
 class UploadController extends Controller
 {
@@ -22,11 +25,11 @@ class UploadController extends Controller
     public function index()
     {
 
-        //$student_details = User::where('id', \Auth::user()->id)->get();
-        $student_details = 22984348;
+        //$student_details = 22984348;
+        $student_details = User::where('student_no', Auth::user()->student_no)->first();
+        $supervisors = User::where('role_id', 2)->get();
 
-
-        return \View::make('proposals.create', array('student_details' => $student_details));
+        return \View::make('proposals.create', array('student_details' => $student_details, 'supervisors' => $supervisors));
 
     }
 
@@ -52,9 +55,9 @@ class UploadController extends Controller
         //set status level
         $submit = $request->input('action', null);
         //set file naming convention
-        $filename = date('d-m-y H:i:s - ') . $request->title . ' Proposal.pdf';
+        $filename = date('d-m-y-H:i:s-').$request->title.'.pdf';
         //set file path for database
-        $filepath = 'proposals/'.$request->studentno.$filename;
+        $filepath = 'proposals/'.$request->studentno.'/'.$filename;
         //set student's ID value for author_ID
         $studentID = User::where('student_no', $request->studentno)->pluck('id')->first();
         //set the students role ID number
@@ -65,10 +68,12 @@ class UploadController extends Controller
             $status = 01;
         } else if (($submit === 'submit-upload') || ($submit === 'submit-create')) {
             $status = 02;
+        } else if (($submit === 'submit-preview')) {
+            return view('proposals.form-preview', array('proposalpreview' => $request));
         }
 
         if (($submit === 'draft-create') || ($submit === 'submit-create')) {
-            $pdf = PDF::loadView('proposals.create', $request);
+            $pdf = PDF::loadview('proposals.create', $request);
             $newpdf = $pdf->download($filename);
 
             if (!file_exists('storage/app/proposals' . $request->studentno)) {
@@ -76,7 +81,9 @@ class UploadController extends Controller
                 if (!is_null($request->File('proposal'))) {
 
                     $this->validate($request, [
-                        //form fields to validate
+                        'studentno' => 'required|min:8|max:8',
+                        'title' => 'required',
+                        'sub-title' => 'required',
                     ]);
 
                     $path = $newpdf->storeAs(
@@ -84,9 +91,10 @@ class UploadController extends Controller
                     );
                 }
             }
+            #Dont touch this code - It works
         } elseif (($submit === 'draft-upload') || ($submit === 'submit-upload')) {
-            if (!file_exists('storage/app/proposals'.$request->studentno)) {
-                \Storage::makeDirectory('proposals/' . $request->studentno);
+            if (!file_exists('storage/app/public/proposals'.$request->studentno)) {
+                \Storage::makeDirectory('/public/proposals/' . $request->studentno);
                 if (!is_null($request->File('proposal'))) {
 
                     $this->validate($request, [
@@ -96,22 +104,29 @@ class UploadController extends Controller
                     ]);
 
                     $path = $request->file('proposal')->storeAs(
-                        'proposals/'.$request->studentno, $filename
+                        'public/proposals/'.$request->studentno, $filename
                     );
         }
 
         $proposals = Proposals::create([
             'author_id' => $studentID,
             'title' => $request->title,
-            'file_address' => asset($filename),
+            'file_address' => $filepath,
             'user_level' => $studentRole,
             'status_id' => $status,
+            'supervisor_id' => $request->supervisor_id,
         ]);
-        $proposals->save();
-        echo 'File successfully uploaded, view uploaded file here: ' . asset('storage/proposals/'.$filename);            }
+                if(!empty($proposals)) {
+                    $proposals->save();
+                }
+
+                echo 'File successfully uploaded, view uploaded file here: <a href="'.Storage::url($filepath).'">'.$request->title.'<//a>';            }
 
         }
+        #Don't touch above code it works
     }
+
+
 
     /**
      * Display the specified resource.

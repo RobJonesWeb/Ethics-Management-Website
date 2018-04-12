@@ -1,38 +1,34 @@
-<?php
-$studentview = false;
-?>
-<!doctype html>
-<html lang="{{ app()->getLocale() }}">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-
-        <title>Laravel</title>
-
-	<link type="text/css" rel="stylesheet" href="{{ asset('css/app.min.css')}}">
-    </head>
-    <body>
-    <div class="box-container">
-        {{--<div class="box-container">
-            @include('includes.nav)
-        </div>--}}
-    </div>
-    <div class="box-container">
-        <article>
-            {!! Form::open(array('route'=>'upload.store', 'class'=>'proposal-creation')) !!}
-            {!! Form::label('text', 'proposal-creation', ['class'=>'proposal-creation'])  !!}
-            {!! Form::text('text', '', ['class'=>'proposal-creation', 'placeholder'=>'Proposal Title']) !!}
-            {{ Form::file('proposal', ['class' => 'proposal-creation']) }}
-            {!! Form::button('Save as draft', ['class'=>'submit proposal-creation', 'name'=>'action', 'value'=>'draft', 'type'=>'submit']) !!}
-            {!! Form::button('Submit', ['class'=>'submit proposal-creation', 'name'=>'action', 'value'=>'finish', 'type'=>'submit']) !!}
-            {{ Form::close() }}
-        </article>
+@extends('layouts.master')
+@section('title')
+    <h2>Home</h2>
+@endsection
+@section('content')
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Home</div>
+                    <div class="panel-body">
+                        <article>
+                            Welcome to the ethics management software
+                            @if(Auth::check())
+                                @if(!is_null($proposals))
+                                <p>Continue with your current proposal: <a href="/proposals/{{$proposals->id}}">{{$proposals->title}}</a></p>
+                                @elseif(is_null($proposals))
+                                <p>I can see you have not currently uploaded a proposal: <a href="/upload">Upload a proposal</a></p>
+                                @endif
+                            @elseif(!Auth::check())
+                                <p>I can see you are not currently logged in, you should <a href="/register/student">Register</a> or if you have an account then why don't you <a href="/login">login</a></p>
+                            @endif
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <div class="box-container">
         <footer>
-            Footer Content
+            <p>&copy; Rob Jones 2018</p>
         </footer>
     </div>
-    </body>
-</html>
+@endsection

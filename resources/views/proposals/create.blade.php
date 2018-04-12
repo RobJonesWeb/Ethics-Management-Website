@@ -12,7 +12,17 @@
 
             <div id="create" class="tab-child">
                 <h3>Create proposal from form</h3>
-                <!-- Create Form -->
+                <p>Removed feature due to lack of time</p>
+{{--                {!! Form::open(array('route'=>'upload.store', 'class'=>'proposal-creation', 'files' => false)) !!}
+                {!! Form::label('studentno', 'Student Number', ['class'=>'proposal-field'])  !!}
+                {!! Form::text('studentno', $student_details->student_no, ['class'=>'proposal-field', 'readonly']) !!}
+                {!! Form::label('title', 'Proposal Title', ['class'=>'proposal-field'])  !!}
+                {!! Form::text('title', '', ['class'=>'proposal-field']) !!}
+                {!! Form::label('sub_title', 'Proposal Sub-title', ['class'=>'proposal-field'])  !!}
+                {!! Form::text('sub_title', '', ['class'=>'proposal-field']) !!}
+                {!! Form::button('Save as draft', ['class'=>'submit proposal-field', 'name'=>'action', 'value'=>'draft-preview', 'type'=>'submit']) !!}
+                {!! Form::button('Submit', ['class'=>'submit proposal-field', 'name'=>'action', 'value'=>'submit-preview', 'type'=>'submit']) !!}
+                {{ Form::close() }}--}}
             </div>
 
             <div id="upload" class="tab-child">
@@ -24,7 +34,13 @@
                 {!! Form::label('title', 'Proposal Title', ['class'=>'proposal-field'])  !!}
                 {!! Form::text('title', '', ['class'=>'proposal-field']) !!}
                 {!! Form::label('studentno', 'Student Number', ['class'=>'proposal-field'])  !!}
-                {!! Form::text('studentno', $student_details, ['class'=>'proposal-field', 'readonly']) !!}
+                {!! Form::text('studentno', $student_details->student_no, ['class'=>'proposal-field', 'readonly']) !!}
+                {!! Form::label('supervisor_id', 'Supervisor', ['class'=>'proposal-field']) !!}
+                <select class="proposal-field" name="supervisor_id">
+                    @foreach($supervisors as $supervisor)
+                        <option value="{{$supervisor->id}}">{{$supervisor->name}}</option>
+                    @endforeach
+                </select>
                 {!! Form::label('proposal', 'Upload Proposal (.pdf)', ['class'=>'proposal-field'])  !!}
                 {{ Form::file('proposal', ['class' => 'proposal-field']) }}
                 {!! Form::button('Save as draft', ['class'=>'submit proposal-field', 'name'=>'action', 'value'=>'draft-upload', 'type'=>'submit']) !!}

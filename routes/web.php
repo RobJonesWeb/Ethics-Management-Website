@@ -11,9 +11,21 @@
 |
 */
 
+use Illuminate\Foundation\Auth\RegistersUsers;
+
+Auth::routes();
+Route::get('/register/{role}', 'Auth\RegisterController@showRegistrationForm');
+Route::post('register', 'Auth\RegisterController@create');
+route::get('logout', function() {
+    Auth::logout();
+    return view('home');
+});
+
 Route::resource('/', 'HomeController');
+Route::resource('/home', 'HomeController');
 Route::resource('/upload', 'UploadController');
 Route::post('upload', ['uses' => 'UploadController@store', 'as' => 'upload.store']);
-Auth::routes();
+Route::resource('proposals', 'ProposalsController');
+Route::get('/proposals/{id}', 'ProposalsController@show');
 
 

@@ -1,5 +1,7 @@
 @extends('layouts.master')
-
+@section('title')
+    <h2>Register</h2>
+@endsection
 @section('content')
 <div class="container">
     <div class="row">
@@ -10,7 +12,7 @@
                 <div class="panel-body">
                     <form class="form-horizontal" method="POST" action="{{ route('register') }}">
                         {{ csrf_field() }}
-
+                        <input type="hidden" name="role_id" value="{{$role}}">
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                             <label for="name" class="col-md-4 control-label">Name</label>
 
@@ -33,7 +35,7 @@
 
                                 @if ($errors->has('email'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
+                                        <strong>{{ $errors->first('email') }} Please register with a .edgehill.ac.uk e-mail address</strong>
                                     </span>
                                 @endif
                             </div>

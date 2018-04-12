@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Proposals;
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Storage;
 
 class ProposalsController extends Controller
 {
@@ -14,7 +17,10 @@ class ProposalsController extends Controller
      */
     public function index()
     {
-        //
+        $users = User::where('id', Auth::user()->id)->get();
+        $proposals = Proposals::where('author_id', Auth::user()->id)->orderBy('created_at', 'desc')->get();
+
+        return view('proposals.list', array('users' => $users, 'proposals' => $proposals));
     }
 
     /**
@@ -47,7 +53,10 @@ class ProposalsController extends Controller
      */
     public function show($id)
     {
-        //
+        $proposal = Proposals::findOrFail($id);
+        #$file = Storage::get($proposal->file_address);
+        return view('proposals.view', array('proposal' => $proposal));
+
     }
 
     /**

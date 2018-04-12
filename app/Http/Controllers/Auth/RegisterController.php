@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\User;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
@@ -27,7 +28,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.
@@ -39,6 +40,21 @@ class RegisterController extends Controller
         $this->middleware('guest');
     }
 
+    public function index(Request $role)
+    {
+
+        $data = [];
+
+        if ($role == "student") {
+            $data['role'] = 1;
+        } elseif ($role == "supervisor" && auth()->check()->role_id == 2) {
+            $data['role'] = 2;
+        }
+
+        return view('auth.register', array('role' => $data));
+    }
+
+
     /**
      * Get a validator for an incoming registration request.
      *
@@ -49,9 +65,10 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
+            'email' => 'required|string|email|regex:/(.*)@edgehill\.ac\.uk/|max:255|unique:users',
             'password' => 'required|string|min:8|confirmed',
             'student_no' => 'string|min:8|max:8',
+            '_token' => 'required',
         ]);
     }
 
@@ -61,12 +78,17 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\User
      */
-    protected function create(array $data)
+    protected function create(Request $data)
     {
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
+            'remember_token' => $data['_token'],
+            'student_no' => $data['student_no'],
+            'role_id' => $data['role_id']
         ]);
+
+        return view('home');
     }
 }
