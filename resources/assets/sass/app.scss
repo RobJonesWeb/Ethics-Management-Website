@@ -82,6 +82,10 @@ footer {
   border-top: none;
 }
 
+article {
+  width: inherit;
+}
+
 article form {
   margin: 1%;
 }
@@ -107,6 +111,15 @@ article form {
     background: #B0B0B0;
   }
 
+  .proposal {
+    width: 80%;
+    margin: 2% 10%;
+    padding: 2%;
+    background: #FFF;
+    border: 3px solid $secondary-bg-color;
+    border-radius: 2%;
+  }
+
   .proposal-creation {
     button {
       display: inline!important;
@@ -118,4 +131,8 @@ article form {
         background: #B0B0B0;
       }
     }
+  }
+
+  .red {
+    color: #F00;
   }

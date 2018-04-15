@@ -4,10 +4,10 @@
         @if(Auth::check())
             @if (auth()->user()->role_id == 1)
                 <li><a href="/upload">Upload</a></li>
-                <li><a href="/proposals">My Proposal</a></li>
+                <li><a href="/proposals/live">My Proposal</a></li>
                 <li><a href="/logout">Logout</a></li>
             @elseif (auth()->user()->role_id == 2)
-                <li><a href="/proposals">Proposals</a></li>
+                <li><a href="/proposals/live">Proposals</a></li>
                 <li><a href="/register/supervisor">Register Staff Member</a></li>
                 <li><a href="/logout">Logout</a></li>
             @endif

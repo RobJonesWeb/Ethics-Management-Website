@@ -29,6 +29,6 @@ class HomeController extends Controller
             $proposals = null;
         }
 
-        return view('home', array('proposals' => $proposals));
+        return view('home', array('proposals' => $proposals, 'newregistration' => false, 'reviewed' => 1));
     }
 }

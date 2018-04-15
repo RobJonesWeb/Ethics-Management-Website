@@ -21,11 +21,9 @@ class CreateProposalsTable extends Migration
             $table->string('file_address')->unique();
             $table->integer('user_level')->unsigned();
             $table->foreign('user_level')->references('id')->on('roles');
-            $table->integer('supervisor_id')->unsigned();
-            $table->foreign('supervisor_id')->references('id')->on('users');
             $table->integer('status_id')->unsigned();
             $table->foreign('status_id')->references('id')->on('status_levels');
-            $table->integer('version')->unsigned();
+            $table->string('feedback')->nullable();
             $table->timestamps();
         });
     }

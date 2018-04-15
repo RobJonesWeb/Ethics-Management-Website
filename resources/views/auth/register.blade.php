@@ -4,6 +4,9 @@
 @endsection
 @section('content')
 <div class="container">
+    <?php
+    $supervisors = \App\User::where('role_id', 2)->get();
+    ?>
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
@@ -62,17 +65,28 @@
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
                             </div>
                         </div>
-
+                        @if($role == 1)
                         <div class="form-group">
                             <label for="student_no" class="col-md-4 control-label">Student Number</label>
 
                             <div class="col-md-6">
-                                <input id="student_no" type="studentno" class="form-control" name="student_no">
+                                <input id="student_no" type="text" class="form-control" name="student_no">
+                            </div><br/>
+
+                            <div class="form-group">
+                                <label for="supervisor_id" class="col-md-4 control-label">Supervisor</label>
+                                <div class="col-md-6">
+                                <select name="supervisor_id">
+                                    @foreach($supervisors as $supervisor)
+                                        <option value="{{$supervisor->id}}">{{$supervisor->name}}</option>
+                                    @endforeach
+                                </select>
+                                </div>
                             </div>
                         </div>
 
 
-
+                        @endif
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
                                 <button type="submit" class="btn btn-primary">

@@ -15,12 +15,26 @@ class ProposalsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($type)
     {
-        $users = User::where('id', Auth::user()->id)->get();
-        $proposals = Proposals::where('author_id', Auth::user()->id)->orderBy('created_at', 'desc')->get();
 
-        return view('proposals.list', array('users' => $users, 'proposals' => $proposals));
+        $users = User::where('id', Auth::user()->id)->get();
+        $filteredstudents = [];
+
+        if (Auth::user()->role_id == 1) {
+            $proposals = Proposals::where('author_id', Auth::user()->id)->orderBy('created_at', 'desc')->get();
+            $users = User::where('id', Auth::user()->id)->get();
+        } elseif (Auth::user()->role_id == 2){
+            $users = User::where('supervisor_id', Auth::user()->id)->get();
+            $proposals = Proposals::all();
+        }
+
+        if ($type == 'live') {
+            return view('proposals.list', array('users' => $users, 'proposals' => $proposals));
+        } elseif ($type == 'archive') {
+            return view('proposals.archive', array('users' => $users, 'proposals' => $proposals));
+
+        }
     }
 
     /**
@@ -41,7 +55,9 @@ class ProposalsController extends Controller
      */
     public function store(Request $request)
     {
-        $proposals = Proposals::create($request->all());
+        $proposals = Proposals::create(
+            $request->all()
+        );
         $proposals->save();
     }
 
@@ -54,8 +70,26 @@ class ProposalsController extends Controller
     public function show($id)
     {
         $proposal = Proposals::findOrFail($id);
-        #$file = Storage::get($proposal->file_address);
-        return view('proposals.view', array('proposal' => $proposal));
+        $users = User::all();
+        return view('proposals.view', array('proposal' => $proposal, 'users' => $users));
+
+    }
+
+    public function downloadProposal($id) {
+        $proposal = Proposals::findOrFail($id);
+
+        $path = $proposal->file_address;
+
+        return response()->download($path);
+
+    }
+
+    public function downloadFeedback($id) {
+        $proposal = Proposals::findOrFail($id);
+
+        $path = $proposal->feedback;
+
+        return response()->download($path);
 
     }
 

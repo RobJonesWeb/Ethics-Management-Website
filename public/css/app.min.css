@@ -8438,6 +8438,10 @@ footer {
   border-top: none;
 }
 
+article {
+  width: inherit;
+}
+
 article form {
   margin: 1%;
 }
@@ -8466,6 +8470,15 @@ input[readonly] {
   background: #B0B0B0;
 }
 
+.proposal {
+  width: 80%;
+  margin: 2% 10%;
+  padding: 2%;
+  background: #FFF;
+  border: 3px solid #0d98ba;
+  border-radius: 2%;
+}
+
 .proposal-creation button {
   display: inline !important;
 }
@@ -8477,5 +8490,9 @@ input[readonly] {
 
 .proposal-creation .proposal-field input[readonly] {
   background: #B0B0B0;
+}
+
+.red {
+  color: #F00;
 }
 

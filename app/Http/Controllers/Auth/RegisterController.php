@@ -35,23 +35,25 @@ class RegisterController extends Controller
      *
      * @return void
      */
-    public function __construct()
+/*    public function __construct()
     {
         $this->middleware('guest');
-    }
+    }*/
 
     public function index(Request $role)
     {
 
         $data = [];
+        $supervisors = User::where('role_id', 2)->get();
+
 
         if ($role == "student") {
             $data['role'] = 1;
-        } elseif ($role == "supervisor" && auth()->check()->role_id == 2) {
+            return view('auth.register', array('role' => $data, 'supervisors' => $supervisorsphp ));
+        } elseif ($role == "supervisor" && auth()->user()->role_id == 2) {
+            return view('auth.register', array('role' => $data, 'proposals' => 'na'));
             $data['role'] = 2;
         }
-
-        return view('auth.register', array('role' => $data));
     }
 
 
@@ -80,7 +82,7 @@ class RegisterController extends Controller
      */
     protected function create(Request $data)
     {
-        return User::create([
+        User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
@@ -89,6 +91,6 @@ class RegisterController extends Controller
             'role_id' => $data['role_id']
         ]);
 
-        return view('home');
+        return view('home', array('newregistration' => true));
     }
 }

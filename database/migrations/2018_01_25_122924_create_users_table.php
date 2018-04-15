@@ -21,6 +21,8 @@ class CreateUsersTable extends Migration
             $table->foreign('role_id')->references('id')->on('roles');
             $table->string('password');
             $table->string('student_no')->signed()->nullable();
+            $table->integer('supervisor_id')->unsigned()->nullable();
+            $table->foreign('supervisor_id')->references('id')->on('users');
             $table->rememberToken();
             $table->timestamps();
         });

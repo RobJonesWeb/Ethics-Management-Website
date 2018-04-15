@@ -14,9 +14,4 @@
             {{ Form::close() }}
         </div>
     </article>
-    <!--<div class="box-container">
-        <footer>
-            Footer Content
-        </footer>
-    </div>-->
 @endsection
