@@ -43,15 +43,17 @@ class RegisterController extends Controller
     public function index(Request $role)
     {
 
+        //initiate $data variable
         $data = [];
+        //get all supervisors from database
         $supervisors = User::where('role_id', 2)->get();
 
-
+        //determine if the $role is a student or supervisor and set the relevant role to $data['role'] and pass the relevant data to the view
         if ($role == "student") {
             $data['role'] = 1;
-            return view('auth.register', array('role' => $data, 'supervisors' => $supervisorsphp ));
+            return view('auth.register', array('role' => $data, 'supervisors' => $supervisors ));
         } elseif ($role == "supervisor" && auth()->user()->role_id == 2) {
-            return view('auth.register', array('role' => $data, 'proposals' => 'na'));
+            return view('auth.register', array('role' => $data, 'proposals' => null));
             $data['role'] = 2;
         }
     }
@@ -65,6 +67,7 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
+        //regular expression to determine if the user is using an edge hill email address
         return Validator::make($data, [
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|regex:/(.*)@edgehill\.ac\.uk/|max:255|unique:users',
@@ -88,6 +91,7 @@ class RegisterController extends Controller
             'password' => bcrypt($data['password']),
             'remember_token' => $data['_token'],
             'student_no' => $data['student_no'],
+            'supervisor_id' => $data['supervisor_id'],
             'role_id' => $data['role_id']
         ]);
 

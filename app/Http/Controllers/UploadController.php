@@ -33,9 +33,11 @@ class UploadController extends Controller
         if($proposals != null) {
             if ($proposals->status_id == 2) {
                 return view('home', array('student_details' => $student_details, 'supervisors' => $supervisors, 'reviewed' => 0, 'newregistration' => 0, 'proposals' => $proposals));
+            } elseif ($proposals->status_id == 3) {
+                return view('proposals.create', array('student_details' => $student_details, 'supervisors' => $supervisors));
+            } else {
+                echo 'Your proposal has already been accepted, you do not need to submit another';
             }
-        } else {
-            return view('proposals.create', array('student_details' => $student_details, 'supervisors' => $supervisors));
         }
     }
 
@@ -78,21 +80,22 @@ class UploadController extends Controller
             elseif (Auth::user()->role_id == 2)
                 $proposals = Proposals::all();
 
-            return view('home', array('users' => $users, 'proposals' => $proposals, 'newregistration' => false));
+            return view('home', array('users' => $users, 'proposals' => $proposals));
 
         }
         if ($submit == 'submit-feedback' && !is_null($request->file('feedback'))) {
-
             $proposal = Proposals::findOrFail($request->proposalID);
             $studentdetails = User::where('id', $proposal->author_id)->first();
             if (!file_exists('storage/app/public/feedback/' . $studentdetails->student_no)) {
-                \Storage::makeDirectory('feedback/' . $studentdetails->student_no);
+                \Storage::makeDirectory('/public/feedback/' . $studentdetails->student_no);
             }
             $filepath = 'storage/feedback/' . $studentdetails->student_no . '/feedback.pdf';
-            if (!is_null($request->file))
+            if (!is_null($request->file())) {
                 $path = $request->file('feedback')->storeAs(
                     'public/feedback/' . $studentdetails->student_no, 'feedback.pdf'
                 );
+            }
+
 
             if ($request->passed == 'no') {
                 $status = 3;
@@ -110,7 +113,7 @@ class UploadController extends Controller
             $users = User::where('id', Auth::user()->id)->get();
             $proposals = Proposals::all();
 
-            return view('home', array('users' => $users, 'proposals' => $proposals, 'newregistration' => false));
+            return view('home');
 
         } elseif ($submit == 'submit-feedback' && is_null($request->file('feedback'))) {
 
@@ -129,7 +132,7 @@ class UploadController extends Controller
             $users = User::where('id', Auth::user()->id)->get();
             $proposals = Proposals::all();
 
-            return view('home', array('users' => $users, 'proposals' => $proposals, 'newregistration' => false));
+            return view('home', array('users' => $users, 'proposals' => $proposals));
         }
 
         //set file naming convention
@@ -201,7 +204,8 @@ class UploadController extends Controller
                     $proposals->save();
                 }
 
-                echo 'File successfully uploaded, view uploaded file here: <a href="' . asset($proposals->file_address) . '" target="">' . $request->title . '<//a>';
+                $users = User::where('id', Auth::user()->id)->get();
+                return view('home', array('users' => $users, 'proposals' => $proposals));
             }
 
         }

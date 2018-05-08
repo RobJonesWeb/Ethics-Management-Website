@@ -43,7 +43,7 @@
                 </div>
                 @foreach($proposals as $proposal)
                     @foreach($users as $user)
-                        @if($user->id == $proposal->author_id)
+                @if($user->id == $proposal->author_id)
                             @if($user->supervisor_id == Auth::user()->id)
                                 @if($proposal->status_id == 2)
                                     <div class="proposal">

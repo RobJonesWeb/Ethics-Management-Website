@@ -10,11 +10,12 @@
                     <div class="panel-heading">Home</div>
                     <div class="panel-body">
                         <article>
-                            @if($newregistration == true)
+                            @if(isset($newregistration))
+                                @if($newregistration == true)
                                 <p class="red">Registration successful, you can now log in</p>
-                            @elseif($reviewed == 0)
-                                <p class="red">You currently have a proposal waiting for review, please wait until it has been reviewed before submitting a new one. Check the status of the review <a href="/proposals/live">here</a></p>
+                                @endif
                             @endif
+
                             @if(Auth::check() == true)
                                     <p>Welcome {{Auth::user()->name}} to the ethics management software</p>
                                     @if(Auth::user()->role_id == 1)

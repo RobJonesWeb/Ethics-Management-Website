@@ -18,7 +18,7 @@ Route::get('/register/{role}', 'Auth\RegisterController@showRegistrationForm');
 Route::post('register', 'Auth\RegisterController@create');
 route::get('logout', function() {
     Auth::logout();
-    return view('home', array('newregistration' => false, 'reviewed' => null));
+    return view('home');
 });
 
 Route::resource('/', 'HomeController');
