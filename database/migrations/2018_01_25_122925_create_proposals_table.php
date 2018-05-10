@@ -19,8 +19,6 @@ class CreateProposalsTable extends Migration
             $table->foreign('author_id')->references('id')->on('users');
             $table->string('title');
             $table->string('file_address')->unique();
-            $table->integer('user_level')->unsigned();
-            $table->foreign('user_level')->references('id')->on('roles');
             $table->integer('status_id')->unsigned();
             $table->foreign('status_id')->references('id')->on('status_levels');
             $table->string('feedback')->nullable();

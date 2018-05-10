@@ -25,8 +25,10 @@ class HomeController extends Controller
         if(Auth::check()) {
             $userinfo = Auth::user();
             $proposals = Proposals::where('author_id', Auth::user()->id)->first();
+            return view('home', array('proposals' => $proposals));
         }
 
-        return view('home', array('proposals' => $proposals));
+        return view('home');
+
     }
 }

@@ -38,6 +38,8 @@ class UploadController extends Controller
             } else {
                 echo 'Your proposal has already been accepted, you do not need to submit another';
             }
+        } else {
+            return view('proposals.create', array('student_details' => $student_details, 'supervisors' => $supervisors));
         }
     }
 

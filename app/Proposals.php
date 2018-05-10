@@ -15,7 +15,7 @@ class Proposals extends Model
      * @var array
      */
     protected $fillable = [
-    'author_id', 'title', 'file_address', 'user_level', 'status_id', 'feedback'
+    'author_id', 'title', 'file_address', 'status_id', 'feedback'
 ];
 
 }

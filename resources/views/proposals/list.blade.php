@@ -59,7 +59,7 @@
                                         <p>Status: Reviewed - Accepted</p>
                                         <p>Author: {{$user->name .' ('.$user->student_no.')'}}</p>
                                         <p>Date: {{$proposal->created_at}}</p>
-                                        <a href="/proposal/{{$proposal->id}}">View</a>
+                                        <a href="{{asset($proposal->file_address)}}">View</a>
                                         {!! Form::open(array('route'=>'upload.store', 'class'=>'proposal-creation')) !!}
                                         {!! Form::hidden('proposalID', $proposal->id) !!}
                                         {!! Form::button('Archive', ['class'=>'submit proposal-field', 'name'=>'action', 'value'=>'archive', 'type'=>'submit']) !!}
