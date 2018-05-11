@@ -3,7 +3,7 @@
 * Type **git clone https://github.com/RobJonesWeb/Ethics-Management-Website.git**
 * Type **composer update**
     * wait for composer to finish updating
-* Type **cp .env.example .env**
+* Type **cp .env.example .env** <br/>
 ####copy the below configuration and paste into .env
 > APP_NAME=Laravel <br/>
 > APP_ENV=local <br/>
