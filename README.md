@@ -1,6 +1,7 @@
 # Installation #
 #### **In bash**
 * Type **git clone https://github.com/RobJonesWeb/Ethics-Management-Website.git**
+* Type **cd Ethics-Management-Website**
 * Type **composer update**
     * wait for composer to finish updating
 * Type **cp .env.example .env** <br/>
