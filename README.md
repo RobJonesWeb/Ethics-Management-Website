@@ -51,6 +51,7 @@
     * name it '**ethics-website**'
     * Give it a default collation of '**utf8 - default collation**'
     * Click Apply twice
+    
 #### **in Bash:**
 
 * Type **php artisan migrate**
