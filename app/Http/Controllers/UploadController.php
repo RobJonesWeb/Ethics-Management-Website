@@ -240,7 +240,7 @@ class UploadController extends Controller
 
         return view('proposals.create', array('proposal' => $proposal));
 
-        /*
+        /* Code left in to show how I was trying to do the create from form aspect of the proposal creation
         if (!is_null($request->file('feedback'))) {
             $this->validate([
                 'proposal_id' => 'required',
