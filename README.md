@@ -4,7 +4,7 @@
 * Type **composer update**
     * wait for composer to finish updating
 * Type **cp .env.example .env** <br/>
-####copy the below configuration and paste into .env
+Copy the below configuration and paste into .env
 > APP_NAME=Laravel <br/>
 > APP_ENV=local <br/>
 > APP_KEY= <br/>
