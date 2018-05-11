@@ -6,40 +6,40 @@
 * Type **cp .env.example .env**
 ####copy the below configuration and paste into .env
 > APP_NAME=Laravel <br/>
-  APP_ENV=local <br/>
-  APP_KEY= <br/>
-  APP_DEBUG=true <br/>
-  APP_LOG_LEVEL=debug <br/> 
-  APP_URL=http://localhost <br/>
- <br/> 
+> APP_ENV=local <br/>
+> APP_KEY= <br/>
+> APP_DEBUG=true <br/>
+> APP_LOG_LEVEL=debug <br/> 
+> APP_URL=http://localhost <br/>
+> <br/> 
 > DB_CONNECTION=mysql <br/>
-  DB_HOST=127.0.0.1 <br/>
-  DB_PORT=3306 <br/>
-  DB_DATABASE=ethics-website <br/>
-  DB_USERNAME=root <br/>
-  DB_PASSWORD=webdev <br/>
-  <br/>
+> DB_HOST=127.0.0.1 <br/>
+> DB_PORT=3306 <br/>
+> DB_DATABASE=ethics-website <br/>
+> DB_USERNAME=root <br/>
+> DB_PASSWORD=webdev <br/>
+> <br/>
 > BROADCAST_DRIVER=log <br/>
-  CACHE_DRIVER=file <br/>
-  SESSION_DRIVER=file <br/>
-  SESSION_LIFETIME=120 <br/>
-  QUEUE_DRIVER=sync <br/>
-  <br/>
+> CACHE_DRIVER=file <br/>
+> SESSION_DRIVER=file <br/>
+> SESSION_LIFETIME=120 <br/>
+> QUEUE_DRIVER=sync <br/>
+> <br/>
 > REDIS_HOST=127.0.0.1 <br/>
-  REDIS_PASSWORD=null <br/>
-  REDIS_PORT=6379 <br/>
-  <br/>
+> REDIS_PASSWORD=null <br/>
+> REDIS_PORT=6379 <br/>
+> <br/>
 > MAIL_DRIVER=smtp <br/>
-  MAIL_HOST=smtp.mailtrap.io <br/>
-  MAIL_PORT=2525 <br/>
-  MAIL_USERNAME=null <br/>
-  MAIL_PASSWORD=null <br/>
-  MAIL_ENCRYPTION=null <br/>
-  <br/>
+> MAIL_HOST=smtp.mailtrap.io <br/>
+> MAIL_PORT=2525 <br/>
+> MAIL_USERNAME=null <br/>
+> MAIL_PASSWORD=null <br/>
+> MAIL_ENCRYPTION=null <br/>
+> <br/>
 > PUSHER_APP_ID= <br/>
-  PUSHER_APP_KEY= <br/>
-  PUSHER_APP_SECRET= <br/>
-  PUSHER_APP_CLUSTER=mt1 <br/>
+> PUSHER_APP_KEY= <br/>
+> PUSHER_APP_SECRET= <br/>
+> PUSHER_APP_CLUSTER=mt1 <br/>
 
 #### **in Bash:**
 
